@@ -1,5 +1,10 @@
 Changelog for grphp-statsd.
 
+h3. 0.0.3
+
+* Fix composer dependencies
+* Fix timer to properly measure in ms
+
 h3. 0.0.2
 
 * grphp 0.3.0 support

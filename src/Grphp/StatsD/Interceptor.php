@@ -21,6 +21,11 @@ use Grphp\Client\Interceptors\Base;
 
 class Interceptor extends Base
 {
+    public function __construct(array $options = [])
+    {
+        parent::__construct($options);
+    }
+
     /** @var \Domnikl\Statsd\Client $client */
     private $client;
 
@@ -30,31 +35,42 @@ class Interceptor extends Base
      */
     public function call(callable $callback)
     {
-        $cl = $this->client();
-        $k = $this->key();
-
-        $startTime = gettimeofday(true);
+        \PHP_Timer::start();
         /** @var \Grphp\Client\Response $response */
         $response = $callback();
-        $elapsed = gettimeofday(true) - $startTime;
+        $elapsed = \PHP_Timer::stop();
+        $elapsed = round($elapsed * 1000.00, 4);
 
+        $this->measure($elapsed, $response->isSuccess());
+        return $response;
+    }
+
+    /**
+     * Measure the response in statsd
+     *
+     * @param float $elapsed time elapsed in ms
+     * @param bool $success if the response is a successful one or not
+     */
+    private function measure($elapsed, $success = true)
+    {
+        $k = $this->key();
+        $cl = $this->client();
         $cl->timing($k, $elapsed);
         $cl->increment($k);
         if ($this->option('gauge', false)) {
             $cl->gauge($k, $elapsed);
         }
-        if ($response->isSuccess()) {
+        if ($success) {
             $cl->increment($k . '.success');
         } else {
             $cl->increment($k . '.failure');
         }
-        return $response;
     }
 
     /**
      * @return string
      */
-    public function key()
+    private function key()
     {
         return $this->serviceKey() . '.' . $this->methodKey();
     }

@@ -1,0 +1,21 @@
+{
+  "name": "bigcommerce/grphp-statsd",
+  "description": "grphp statsd interceptor",
+  "type": "library",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT",
+  "repositories": [
+    { "type": "vcs", "url": "git@github.com:bigcommerce/grphp.git" }
+  ],
+  "require": {
+    "domnikl/statsd": "~2.0",
+    "bigcommerce/grphp": "^0.2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.1.*"
+  },
+  "autoload": {
+    "psr-4": { "": "src/"}
+  }
+}

@@ -86,21 +86,10 @@ class Interceptor extends Base
         if (empty($this->client)) {
             $this->client = $this->option('client');
             if (empty($this->client)) {
-                $this->client = ClientFactory::build($this->config());
+                $this->client = ClientFactory::build($this->getOptions());
             }
         }
         return $this->client;
-    }
-
-    /**
-     * Return the namespaced statsd config from the interceptor options
-     *
-     * @return array
-     */
-    private function config()
-    {
-        $options = $this->getOptions();
-        return array_key_exists('statsd', $options) ? $options['statsd'] : [];
     }
 
     /**
@@ -110,7 +99,7 @@ class Interceptor extends Base
      */
     private function option($key, $default = null)
     {
-        $config = $this->config();
+        $config = $this->getOptions();
         return array_key_exists($key, $config) ? $config[$key] : $default;
     }
 }

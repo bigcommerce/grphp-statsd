@@ -10,7 +10,7 @@
   ],
   "require": {
     "domnikl/statsd": "~2.0",
-    "bigcommerce/grphp": "^0.2.1"
+    "bigcommerce/grphp": "^0.3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "6.1.*"

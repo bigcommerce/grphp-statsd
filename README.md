@@ -12,18 +12,16 @@ composer require bigcommerce/grphp-statsd
 
 ```php
 $config = [
-    'statsd' => [
-        'host' => 'my.statsd.service',
-        'port' => 8125,
-        
-        // optional config options
-        'namespace' => 'myapp',
-        'sample_rate' => 1.0, // 0->1.0 scale. 1.0 is all requests.
-        'mtu' => 1500, // MTU rate
-        'persistent' => false, // keep connection persistent
-        'timeout' => 600, // in seconds
-        'tcp' => false, // true uses TCP instead of UDP
-    ]
+    'host' => 'my.statsd.service',
+    'port' => 8125,
+    
+    // optional config options
+    'namespace' => 'myapp',
+    'sample_rate' => 1.0, // 0->1.0 scale. 1.0 is all requests.
+    'mtu' => 1500, // MTU rate
+    'persistent' => false, // keep connection persistent
+    'timeout' => 600, // in seconds
+    'tcp' => false, // true uses TCP instead of UDP
 ];
 $client->addInterceptor(new \Grphp\StatsD\Interceptor($config));
 ```

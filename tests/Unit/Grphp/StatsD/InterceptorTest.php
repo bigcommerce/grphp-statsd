@@ -17,12 +17,47 @@
  */
 namespace Grphp\StatsD\Test;
 
+use Domnikl\Statsd\Connection\UdpSocket;
+use Grphp\Client\Response;
+use Grphp\StatsD\Interceptor;
 
 class InterceptorTest extends BaseTest
 {
-    public function testKey()
+
+    /**
+     * @dataProvider providerCall
+     * @param string $method
+     * @param string $expectedKey
+     */
+    public function testCall($method, $expectedKey)
     {
-        $this->assertTrue(true);
+        $connection = new UdpSocket();
+        $client = $this->getMockBuilder('\Domnikl\Statsd\Client')
+            ->setConstructorArgs([
+                $connection
+            ])->getMock();
+        $client->expects($this->once())->method('timing')->with($expectedKey);
+
+        $i = new Interceptor([
+            'client' => $client,
+        ]);
+        $s = new TestClient();
+        $i->setStub($s);
+        $i->setMethod($method);
+        $i->call(function()
+        {
+            $message = new \stdClass();
+            $status = new CallStatus();
+            $resp = new Response($message, $status);
+            return $resp;
+        });
+    }
+    public function providerCall()
+    {
+        return [
+            ['bar', 'grphp.statsd.test.test_client.bar'],
+            ['get_thing', 'grphp.statsd.test.test_client.get_thing'],
+        ];
     }
 
 }

@@ -15,8 +15,28 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-error_reporting(E_ALL | E_STRICT);
-require dirname(__DIR__).'/vendor/autoload.php';
-date_default_timezone_set('UTC');
-require dirname(__DIR__) . '/tests/Support/BaseTest.php';
-require dirname(__DIR__) . '/tests/Support/TestStub.php';
+namespace Grphp\Statsd\Test;
+
+class BaseStub
+{
+
+}
+
+class TestClient extends BaseStub
+{
+
+}
+
+class CallStatus
+{
+    public $code = 0;
+    public $details = '';
+    public $metadata = [];
+
+    public function __construct($code = 0, $details = '', $metadata = [])
+    {
+        $this->code = $code;
+        $this->details = $details;
+        $this->metadata = $metadata;
+    }
+}

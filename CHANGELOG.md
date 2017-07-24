@@ -1,5 +1,11 @@
 Changelog for grphp-statsd.
 
+h3. 0.1.0
+
+* Better namespaced key support
+* Added full unit tests
+* Added code coverage
+
 h3. 0.0.3
 
 * Fix composer dependencies

@@ -88,9 +88,12 @@ class Interceptor extends Base
      */
     private function serviceKey()
     {
-        $s = strtolower(get_class($this->getStub()));
-        $s = explode('.', str_replace('\\', '.', $s));
-        array_pop($s);
+        $s = get_class($this->getStub());
+        $s = str_replace('\\', '.', $s);
+        $s = explode('.', $s);
+        foreach ($s as &$c) {
+            $c = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $c));
+        }
         return implode('.', $s);
     }
 

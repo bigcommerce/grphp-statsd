@@ -106,16 +106,16 @@
     "packages-dev": [
         {
             "name": "bigcommerce/grphp",
-            "version": "0.3.3",
+            "version": "0.3.4",
             "source": {
                 "type": "git",
                 "url": "git@github.com:bigcommerce/grphp.git",
-                "reference": "e3e26d6d7035c0b2836a11d25f0b5df1bb1cf16b"
+                "reference": "b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigcommerce/grphp/zipball/e3e26d6d7035c0b2836a11d25f0b5df1bb1cf16b",
-                "reference": "e3e26d6d7035c0b2836a11d25f0b5df1bb1cf16b",
+                "url": "https://api.github.com/repos/bigcommerce/grphp/zipball/b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3",
+                "reference": "b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3",
                 "shasum": ""
             },
             "require": {
@@ -137,10 +137,10 @@
             ],
             "description": "gRPC PHP Framework",
             "support": {
-                "source": "https://github.com/bigcommerce/grphp/tree/0.3.3",
+                "source": "https://github.com/bigcommerce/grphp/tree/0.3.4",
                 "issues": "https://github.com/bigcommerce/grphp/issues"
             },
-            "time": "2017-09-14T18:35:18+00:00"
+            "time": "2017-09-15T01:20:06+00:00"
         },
         {
             "name": "doctrine/instantiator",

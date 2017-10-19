@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3d91e18b2237ff3a87e651f06b9530b",
+    "content-hash": "584b2a0dcd152b1665b92496f6a9a8e3",
     "packages": [
         {
             "name": "domnikl/statsd",
@@ -106,23 +106,23 @@
     "packages-dev": [
         {
             "name": "bigcommerce/grphp",
-            "version": "0.3.4",
+            "version": "v0.3.8",
             "source": {
                 "type": "git",
                 "url": "git@github.com:bigcommerce/grphp.git",
-                "reference": "b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3"
+                "reference": "a0259e299dd2589e7401ffc9bf3eaea63ddd8520"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bigcommerce/grphp/zipball/b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3",
-                "reference": "b63f5d54b98b89c2b3e4df2f4afad8fbda0bc3e3",
+                "url": "https://api.github.com/repos/bigcommerce/grphp/zipball/a0259e299dd2589e7401ffc9bf3eaea63ddd8520",
+                "reference": "a0259e299dd2589e7401ffc9bf3eaea63ddd8520",
                 "shasum": ""
             },
             "require": {
                 "phpunit/php-timer": "1.0.*"
             },
             "require-dev": {
-                "bigcommerce/grpc-php": "dev-bc-1.3.2",
+                "bigcommerce/grpc-php": "1.3.2-p1",
                 "phpunit/php-code-coverage": "^5.2@dev",
                 "phpunit/phpunit": "6.1.*"
             },
@@ -137,10 +137,10 @@
             ],
             "description": "gRPC PHP Framework",
             "support": {
-                "source": "https://github.com/bigcommerce/grphp/tree/0.3.4",
+                "source": "https://github.com/bigcommerce/grphp/tree/v0.3.8",
                 "issues": "https://github.com/bigcommerce/grphp/issues"
             },
-            "time": "2017-09-15T01:20:06+00:00"
+            "time": "2017-10-19T16:55:46+00:00"
         },
         {
             "name": "doctrine/instantiator",

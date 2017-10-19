@@ -1,5 +1,9 @@
 Changelog for grphp-statsd.
 
+h3. 0.1.1
+
+* Update grphp dependency to 0.3.8
+
 h3. 0.1.0
 
 * Better namespaced key support

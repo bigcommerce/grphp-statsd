@@ -35,10 +35,10 @@ class Interceptor extends Base
      */
     public function call(callable $callback)
     {
-        \PHP_Timer::start();
+        $start = microtime(true);
         /** @var \Grphp\Client\Response $response */
         $response = $callback();
-        $elapsed = \PHP_Timer::stop();
+        $elapsed = microtime(true) - $start;
         $elapsed = round($elapsed * 1000.00, 4);
 
         $this->measure($elapsed, $response->isSuccess());

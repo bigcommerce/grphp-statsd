@@ -12,22 +12,9 @@
     "phpunit/php-code-coverage": "^5.2@dev",
     "phpunit/phpunit": "6.1.*"
   },
-  "config": {
-    "platform": {
-      "php": "7.0.30"
-    }
-  },
   "autoload": {
     "psr-4": {
       "Grphp\\StatsD\\": "src/Grphp/StatsD"
     }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:bigcommerce/grphp.git"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }

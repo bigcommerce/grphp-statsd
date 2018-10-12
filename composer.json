@@ -9,6 +9,7 @@
   },
   "require-dev": {
     "bigcommerce/grphp": "0.3.8",
+    "friendsofphp/php-cs-fixer": "^2.13",
     "phpunit/phpunit": "^6.4 || ^7.4"
   },
   "autoload": {

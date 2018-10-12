@@ -30,5 +30,5 @@ matrix:
           install: composer update
 
 script:
-    - vendor/bin/phpcs --standard=PSR2 --ignore=src/Grphp/grpc.stubs.php src
+    - vendor/bin/php-cs-fixer fix --diff --dry-run -v
     - vendor/bin/phpunit

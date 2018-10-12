@@ -44,8 +44,7 @@ class InterceptorTest extends BaseTest
         $s = new TestClient();
         $i->setStub($s);
         $i->setMethod($method);
-        $i->call(function()
-        {
+        $i->call(function () {
             $message = new \stdClass();
             $status = new CallStatus();
             $resp = new Response($message, $status);
@@ -59,5 +58,4 @@ class InterceptorTest extends BaseTest
             ['get_thing', 'grphp.statsd.test.test_client.get_thing'],
         ];
     }
-
 }

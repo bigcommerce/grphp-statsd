@@ -9,8 +9,7 @@
   },
   "require-dev": {
     "bigcommerce/grphp": "0.3.8",
-    "phpunit/php-code-coverage": "^5.2@dev",
-    "phpunit/phpunit": "6.1.*"
+    "phpunit/phpunit": "^6.4 || ^7.4"
   },
   "autoload": {
     "psr-4": {

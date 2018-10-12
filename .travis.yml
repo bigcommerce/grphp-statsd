@@ -1,12 +1,34 @@
-language: php
-php:
-  - 7.0
-  - 7.1
 sudo: false
-dist: trusty
-before_script:
-  - composer install
-script:
-  - vendor/bin/phpunit --configuration phpunit.xml.dist
+
+cache:
+    directories:
+        - $HOME/.composer
+
+git:
+    depth: 1
+
+language: php
+
+before_install:
+    - composer self-update
+    - phpenv config-rm xdebug.ini || return 0
+    - composer global show hirak/prestissimo -q || composer global require hirak/prestissimo
+
 matrix:
-  fast_finish: true
+    include:
+        - name: PHP 7.0 with lowest versions of dependencies
+          php: '7.0'
+          install: composer update --prefer-lowest
+        - name: PHP 7.0
+          php: '7.0'
+          install: composer update
+        - name: PHP 7.1
+          php: '7.1'
+          install: composer update
+        - name: PHP 7.2
+          php: '7.2'
+          install: composer update
+
+script:
+    - vendor/bin/phpcs --standard=PSR2 --ignore=src/Grphp/grpc.stubs.php src
+    - vendor/bin/phpunit

@@ -9,6 +9,7 @@
     { "type": "vcs", "url": "git@github.com:bigcommerce/grphp.git" }
   ],
   "require": {
+    "php": "^7.0",
     "domnikl/statsd": "~2.0"
   },
   "require-dev": {

@@ -19,12 +19,10 @@ namespace Grphp\Statsd\Test;
 
 class BaseStub
 {
-
 }
 
 class TestClient extends BaseStub
 {
-
 }
 
 class CallStatus

@@ -8,7 +8,7 @@
     "domnikl/statsd": "~2.0"
   },
   "require-dev": {
-    "bigcommerce/grphp": "0.3.8",
+    "bigcommerce/grphp": "0.5.5",
     "friendsofphp/php-cs-fixer": "^2.13",
     "phpunit/phpunit": "^6.4 || ^7.4"
   },

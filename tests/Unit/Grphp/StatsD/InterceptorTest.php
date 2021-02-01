@@ -17,7 +17,9 @@
  */
 namespace Grphp\StatsD\Test;
 
+use Domnikl\Statsd\Client;
 use Domnikl\Statsd\Connection\UdpSocket;
+use Grphp\Client\Error\Status;
 use Grphp\Client\Response;
 use Grphp\StatsD\Interceptor;
 
@@ -32,7 +34,7 @@ class InterceptorTest extends BaseTest
     public function testCall($method, $expectedKey)
     {
         $connection = new UdpSocket();
-        $client = $this->getMockBuilder('\Domnikl\Statsd\Client')
+        $client = $this->getMockBuilder(Client::class)
             ->setConstructorArgs([
                 $connection
             ])->getMock();
@@ -46,9 +48,8 @@ class InterceptorTest extends BaseTest
         $i->setMethod($method);
         $i->call(function () {
             $message = new \stdClass();
-            $status = new CallStatus();
-            $resp = new Response($message, $status);
-            return $resp;
+            $status = new Status(200, 'OK');
+            return new Response($message, $status);
         });
     }
     public function providerCall()

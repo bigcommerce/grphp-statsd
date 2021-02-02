@@ -17,8 +17,11 @@
  */
 namespace Grphp\Statsd\Test;
 
-class BaseStub
+class BaseStub extends \Grpc\BaseStub
 {
+    public function __construct()
+    {
+    }
 }
 
 class TestClient extends BaseStub

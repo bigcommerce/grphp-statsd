@@ -18,6 +18,7 @@
 namespace Grphp\StatsD;
 
 use Domnikl\Statsd\Client as StatsClient;
+use Domnikl\Statsd\Connection;
 use Domnikl\Statsd\Connection\TcpSocket;
 use Domnikl\Statsd\Connection\UdpSocket;
 
@@ -28,6 +29,8 @@ use Domnikl\Statsd\Connection\UdpSocket;
  */
 class ClientFactory
 {
+    private $config;
+
     public function __construct(array $config = [])
     {
         $this->config = $config;
@@ -59,7 +62,9 @@ class ClientFactory
         $mtu = $this->option('mtu', 1500);
         $sampleRate = $this->option('sample_rate', 1.0);
 
-        if ($tcp) {
+        if ($this->option('connection') instanceof Connection) {
+            $connection = $this->option('connection');
+        } elseif ($tcp) {
             $connection = new TcpSocket($hostname, $port, $timeout, $persistent, $mtu);
         } else {
             $connection = new UdpSocket($hostname, $port, $timeout, $persistent, $mtu);

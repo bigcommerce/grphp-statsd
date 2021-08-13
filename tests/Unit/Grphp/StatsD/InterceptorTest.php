@@ -18,10 +18,13 @@
 namespace Grphp\StatsD\Test;
 
 use Domnikl\Statsd\Client;
+use Domnikl\Statsd\Connection\InMemory;
 use Domnikl\Statsd\Connection\UdpSocket;
 use Grphp\Client\Error\Status;
 use Grphp\Client\Response;
+use Grphp\StatsD\ClientFactory;
 use Grphp\StatsD\Interceptor;
+use stdClass;
 
 class InterceptorTest extends BaseTest
 {
@@ -47,7 +50,7 @@ class InterceptorTest extends BaseTest
         $i->setStub($s);
         $i->setMethod($method);
         $i->call(function () {
-            $message = new \stdClass();
+            $message = new stdClass();
             $status = new Status(200, 'OK');
             return new Response($message, $status);
         });
@@ -58,5 +61,122 @@ class InterceptorTest extends BaseTest
             ['bar', 'grphp.statsd.test.test_client.bar'],
             ['get_thing', 'grphp.statsd.test.test_client.get_thing'],
         ];
+    }
+
+    public function testBaseCallWithSuccessResult(): void
+    {
+        $stub = new TestClient();
+        $method = 'testMethod';
+        $connection = new InMemory();
+        $client = ClientFactory::build(['connection' => $connection]);
+        $interceptor = new Interceptor(['client' => $client]);
+        $interceptor->setStub($stub);
+        $interceptor->setMethod($method);
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(0, 'OK'));
+        });
+
+        $this->assertCount(3, $connection->getMessages());
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[0]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[1]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.success:1|c', $connection->getMessages()[2]);
+    }
+
+    public function testBaseCallWithFailResult(): void
+    {
+        $stub = new TestClient();
+        $method = 'testMethod';
+        $connection = new InMemory();
+        $client = ClientFactory::build(['connection' => $connection]);
+        $interceptor = new Interceptor(['client' => $client]);
+        $interceptor->setStub($stub);
+        $interceptor->setMethod($method);
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(1, 'Fail'));
+        });
+
+        $this->assertCount(3, $connection->getMessages());
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[0]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[1]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.failure:1|c', $connection->getMessages()[2]);
+    }
+
+    public function testTwoBaseCallsWithFailResult(): void
+    {
+        $stub = new TestClient();
+        $method = 'testMethod';
+        $connection = new InMemory();
+        $client = ClientFactory::build(['connection' => $connection]);
+        $interceptor = new Interceptor(['client' => $client]);
+        $interceptor->setStub($stub);
+        $interceptor->setMethod($method);
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(1, 'Fail'));
+        });
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(1, 'Fail'));
+        });
+
+        $this->assertCount(6, $connection->getMessages());
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[0]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[1]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.failure:1|c', $connection->getMessages()[2]);
+
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[3]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[4]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.failure:1|c', $connection->getMessages()[5]);
+    }
+
+    public function testTwoBaseCallsWithOneSuccessOneFailResult(): void
+    {
+        $stub = new TestClient();
+        $method = 'testMethod';
+        $connection = new InMemory();
+        $client = ClientFactory::build(['connection' => $connection]);
+        $interceptor = new Interceptor(['client' => $client]);
+        $interceptor->setStub($stub);
+        $interceptor->setMethod($method);
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(0, 'Fail'));
+        });
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(1, 'Fail'));
+        });
+
+        $this->assertCount(6, $connection->getMessages());
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[0]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[1]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.success:1|c', $connection->getMessages()[2]);
+
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[3]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[4]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.failure:1|c', $connection->getMessages()[5]);
+    }
+
+    public function testBaseCallWithGaugeMetric(): void
+    {
+        $stub = new TestClient();
+        $method = 'testMethod';
+        $connection = new InMemory();
+        $client = ClientFactory::build(['connection' => $connection]);
+        $interceptor = new Interceptor(['client' => $client, 'gauge' => true]);
+        $interceptor->setStub($stub);
+        $interceptor->setMethod($method);
+
+        $interceptor->call(function () {
+            return new Response(new stdClass(), new Status(0, 'OK'));
+        });
+
+        $this->assertCount(4, $connection->getMessages());
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|ms', $connection->getMessages()[0]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod:1|c', $connection->getMessages()[1]);
+        $this->assertStringMatchesFormat('grphp.statsd.test.test_client.testmethod:%f|g', $connection->getMessages()[2]);
+        $this->assertSame('grphp.statsd.test.test_client.testmethod.success:1|c', $connection->getMessages()[3]);
     }
 }

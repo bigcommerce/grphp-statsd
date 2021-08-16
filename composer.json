@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.0 || ^8.0",
-    "domnikl/statsd": "^3.0"
+    "slickdeals/statsd": "^3.1"
   },
   "require-dev": {
     "bigcommerce/grphp": "^3.0",

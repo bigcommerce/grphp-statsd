@@ -1,5 +1,6 @@
 {
   "name": "bigcommerce/grphp-statsd",
+  "homepage": "https://github.com/bigcommerce/grphp-statsd",
   "type": "library",
   "description": "grphp statsd interceptor",
   "license": "MIT",

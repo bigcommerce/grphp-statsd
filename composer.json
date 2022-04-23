@@ -3,12 +3,18 @@
   "type": "library",
   "description": "grphp statsd interceptor",
   "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/repzy/grphp.git"
+    }
+  ],
   "require": {
     "php": "^7.0 || ^8.0",
     "slickdeals/statsd": "^3.1"
   },
   "require-dev": {
-    "bigcommerce/grphp": "^3.0",
+    "bigcommerce/grphp": "dev-latest_grpc",
     "friendsofphp/php-cs-fixer": "^2.18",
     "phpunit/phpunit": "^9.0"
   },

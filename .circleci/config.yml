@@ -9,7 +9,7 @@ jobs:
     parameters:
       php-version:
         type: string
-        default: "7.3"
+        default: "8.0"
     executor:
       name: php/php
       php-version: << parameters.php-version >>
@@ -46,8 +46,8 @@ workflows:
       - tests-unit:
           matrix:
             parameters:
-              php-version: [ "7.3", "7.4", "8.0" ]
+              php-version: [ "8.0" ]
       - cs-fixer:
           matrix:
             parameters:
-              php-version: [ "7.3", "7.4", "8.0" ]
+              php-version: [ "8.0" ]

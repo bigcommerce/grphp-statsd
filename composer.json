@@ -4,7 +4,7 @@
   "description": "grphp statsd interceptor",
   "license": "MIT",
   "require": {
-    "php": "^7.0 || ^8.0",
+    "php": "^8.0",
     "slickdeals/statsd": "^3.1"
   },
   "require-dev": {

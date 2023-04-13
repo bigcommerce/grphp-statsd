@@ -1,0 +1,36 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Grphp\\\\StatsD\\\\ClientFactory\\:\\:__construct\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/ClientFactory.php
+
+		-
+			message: "#^Method Grphp\\\\StatsD\\\\ClientFactory\\:\\:build\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/ClientFactory.php
+
+		-
+			message: "#^Property Grphp\\\\StatsD\\\\ClientFactory\\:\\:\\$config has no type specified\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/ClientFactory.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/ClientFactory.php
+
+		-
+			message: "#^Method Grphp\\\\StatsD\\\\Interceptor\\:\\:measure\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/Interceptor.php
+
+		-
+			message: "#^Parameter \\#2 \\$value of method Domnikl\\\\Statsd\\\\Client\\:\\:gauge\\(\\) expects int\\|string, float given\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/Interceptor.php
+
+		-
+			message: "#^Property Grphp\\\\StatsD\\\\Interceptor\\:\\:\\$client \\(Domnikl\\\\Statsd\\\\Client\\) in empty\\(\\) is not falsy\\.$#"
+			count: 1
+			path: ../src/Grphp/StatsD/Interceptor.php

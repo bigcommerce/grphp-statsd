@@ -5,10 +5,10 @@
   "license": "MIT",
   "require": {
     "php": "^8.0",
+    "bigcommerce/grphp": "^3.0 || dev-master#59a0ea1a7d408674a6e651cee97ce267454ac9f7 as 4.0",
     "slickdeals/statsd": "^3.1"
   },
   "require-dev": {
-    "bigcommerce/grphp": "^3.0",
     "friendsofphp/php-cs-fixer": "^3.16",
     "phpunit/phpunit": "^9.0"
   },

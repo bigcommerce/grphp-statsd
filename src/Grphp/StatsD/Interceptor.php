@@ -17,26 +17,20 @@
  */
 namespace Grphp\StatsD;
 
+use Domnikl\Statsd\Client;
 use Grphp\Client\Interceptors\Base;
+use Grphp\Client\Response;
 
 class Interceptor extends Base
 {
-    public function __construct(array $options = [])
-    {
-        parent::__construct($options);
-    }
-
-    /** @var \Domnikl\Statsd\Client $client */
-    private $client;
+    private Client $client;
 
     /**
-     * @param callable $callback
-     * @return \Grphp\Client\Response
+     * @param callable(): Response $callback
      */
-    public function call(callable $callback)
+    public function call(callable $callback): Response
     {
         $start = microtime(true);
-        /** @var \Grphp\Client\Response $response */
         $response = $callback();
         $elapsed = microtime(true) - $start;
         $elapsed = round($elapsed * 1000.00, 4);
@@ -51,7 +45,7 @@ class Interceptor extends Base
      * @param float $elapsed time elapsed in ms
      * @param bool $success if the response is a successful one or not
      */
-    private function measure($elapsed, $success = true)
+    private function measure(float $elapsed, bool $success = true)
     {
         $k = $this->key();
         $cl = $this->client();
@@ -67,26 +61,17 @@ class Interceptor extends Base
         }
     }
 
-    /**
-     * @return string
-     */
-    private function key()
+    private function key(): string
     {
         return $this->serviceKey() . '.' . $this->methodKey();
     }
 
-    /**
-     * @return mixed
-     */
-    private function methodKey()
+    private function methodKey(): mixed
     {
         return str_replace('\\', '.', strtolower($this->getMethod()));
     }
 
-    /**
-     * @return string
-     */
-    private function serviceKey()
+    private function serviceKey(): string
     {
         $s = get_class($this->getStub());
         $s = str_replace('\\', '.', $s);
@@ -97,10 +82,7 @@ class Interceptor extends Base
         return implode('.', $s);
     }
 
-    /**
-     * @return \Domnikl\Statsd\Client
-     */
-    private function client()
+    private function client(): Client
     {
         if (empty($this->client)) {
             $this->client = $this->option('client');
@@ -111,12 +93,7 @@ class Interceptor extends Base
         return $this->client;
     }
 
-    /**
-     * @param string $key
-     * @param mixed $default
-     * @return mixed
-     */
-    private function option($key, $default = null)
+    private function option(string $key, mixed $default = null): mixed
     {
         $config = $this->getOptions();
         return array_key_exists($key, $config) ? $config[$key] : $default;

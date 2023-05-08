@@ -85,11 +85,9 @@ class Interceptor extends Base
     private function client(): Client
     {
         if (empty($this->client)) {
-            $this->client = $this->option('client');
-            if (empty($this->client)) {
-                $this->client = ClientFactory::build($this->getOptions());
-            }
+            $this->client = $this->option('client') ?? ClientFactory::build($this->getOptions());
         }
+
         return $this->client;
     }
 

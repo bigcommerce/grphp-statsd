@@ -29,8 +29,3 @@ parameters:
 			message: "#^Parameter \\#2 \\$value of method Domnikl\\\\Statsd\\\\Client\\:\\:gauge\\(\\) expects int\\|string, float given\\.$#"
 			count: 1
 			path: ../src/Grphp/StatsD/Interceptor.php
-
-		-
-			message: "#^Property Grphp\\\\StatsD\\\\Interceptor\\:\\:\\$client \\(Domnikl\\\\Statsd\\\\Client\\) in empty\\(\\) is not falsy\\.$#"
-			count: 1
-			path: ../src/Grphp/StatsD/Interceptor.php

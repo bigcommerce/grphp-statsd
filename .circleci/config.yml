@@ -34,8 +34,7 @@ workflows:
       - php/phpunit-tests:
           configuration: "phpunit.xml.dist"
           <<: *default_matrix
-      - cs-fixer:
-          <<: *default_matrix
+      - cs-fixer
       - php/static-analysis:
           <<: *default_matrix
           generate_ide_helper: false

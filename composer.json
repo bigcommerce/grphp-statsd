@@ -4,14 +4,14 @@
   "description": "grphp statsd interceptor",
   "license": "MIT",
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "bigcommerce/grphp": "^3.0 || ^4.0",
     "slickdeals/statsd": "^3.1"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.16",
-    "phpunit/phpunit": "^9.0",
-    "phpstan/phpstan": "^1.10"
+    "phpunit/phpunit": "^11.0",
+    "phpstan/phpstan": "^2.1"
   },
   "autoload": {
     "psr-4": {

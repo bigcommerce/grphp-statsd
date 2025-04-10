@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php"
-         convertWarningsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertErrorsToExceptions="true"
-         backupStaticAttributes="false"
          processIsolation="false"
          backupGlobals="false"
          stopOnFailure="false"
-         colors="true">
+         colors="true"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         failOnNotice="true"
+         failOnWarning="true"
+         failOnDeprecation="false"
+         failOnPhpunitDeprecation="true"
+>
 
     <testsuites>
         <testsuite name="grphp-statsd Test Suite">
@@ -21,13 +27,15 @@
         </exclude>
     </groups>
 
-    <coverage>
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
             <directory suffix=".php">vendor</directory>
         </exclude>
+    </source>
+    <coverage>
         <report>
             <html outputDirectory="coverage" lowUpperBound="35" highLowerBound="70"/>
             <clover outputFile="coverage/coverage.xml"/>

@@ -24,16 +24,17 @@ use Grphp\Client\Error\Status;
 use Grphp\Client\Response;
 use Grphp\StatsD\ClientFactory;
 use Grphp\StatsD\Interceptor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 
 class InterceptorTest extends BaseTest
 {
 
     /**
-     * @dataProvider providerCall
      * @param string $method
      * @param string $expectedKey
      */
+    #[DataProvider('providerCall')]
     public function testCall($method, $expectedKey)
     {
         $connection = new UdpSocket();
@@ -55,7 +56,8 @@ class InterceptorTest extends BaseTest
             return new Response($message, $status);
         });
     }
-    public function providerCall()
+
+    public static function providerCall()
     {
         return [
             ['bar', 'grphp.statsd.test.test_client.bar'],
